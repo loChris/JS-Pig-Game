@@ -1,4 +1,3 @@
-
 // GAME RULES:
 
 // - The game has 2 players, plalying in rounds
@@ -8,7 +7,7 @@
 // that, it's the next player's turn.
 // - The first player to reach 1-- points on GLOBAL score wins the game.
 
-var gameIsPlaying, scores, roundScore, activePlayer;
+var gameIsPlaying, scores, roundScore, activePlayer, previousRoll;
 
 function initialize() {
     gameIsPlaying = true;
@@ -34,7 +33,7 @@ initialize();
 
 document.querySelector('.btn-roll').addEventListener('click', function () {
     if (gameIsPlaying) {
-        // 1. random number generation
+        // 1. random number generation and previous dice roll
         var dice = Math.floor(Math.random() * 6) + 1;
 
         // 2. Display the result
@@ -42,14 +41,18 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
         diceDOM.style.display = 'block';
         diceDOM.src = 'img/dice-' + dice + '.png';
 
-        // 3. Update the round score IF the rolled number was NOT a 1
-        if (dice !== 1) {
+        if (dice === 6 && previousRoll === 6) {
+            scores[activePlayer] = 0;
+            document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+            resetBoard();
+        } else if (dice !== 1) { // 3. Update the round score IF the rolled number was NOT a 1
             // add score
             roundScore += dice;
             document.querySelector('#current-' + activePlayer).textContent = roundScore;
         } else {
             resetBoard();
         }
+        previousRoll = dice;
     }
 });
 

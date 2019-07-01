@@ -36,7 +36,7 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
         // 1. random number generation and previous dice roll
         var dice = Math.floor(Math.random() * 6) + 1;
 
-        // 2. Display the result
+        // 2. display the result
         var diceDOM = document.querySelector('.dice');
         diceDOM.style.display = 'block';
         diceDOM.src = 'img/dice-' + dice + '.png';
@@ -66,7 +66,7 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
 
         // check if player won the game
         if (scores[activePlayer] >= 100) {
-            //player wins
+            // player wins
             document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
             document.querySelector('.dice').style.display = 'none';
             document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
@@ -87,19 +87,9 @@ function resetBoard() {
     document.getElementById('current-1').textContent = '0';
     document.querySelector('.player-0-panel').classList.toggle('active');
     document.querySelector('.player-1-panel').classList.toggle('active');
-
-    // document.querySelector('.player-0-panel').classList.remove('active');  //add or remove clases to html items
-    // document.querySelector('.player-1-panel').classList.add('active');
-
     document.querySelector('.dice').style.display = 'none';
 }
 
 document.querySelector('.btn-new').addEventListener('click', function () {
     initialize();
 });
-
-//document.querySelector('#current-' + activePlayer).textContent = dice; This is called a setter.
-// document.querySelector('#current-' + activePlayer).innerHTML = '<em>' + dice + '</em>';
-
-// var x = document.querySelector('#score-0').textContent; This is called a getter.
-// console.log(x);
